@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Phoria</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Phoria</h1>
+                </div>
+                <nav class="nav">
+                    <a href="index.html">Home</a>
+                    <a href="products.html" class="active">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products-page">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p class="section-subtitle">Choose your perfect moment</p>
+
+            <div class="products-grid">
+                <!-- Breathe Fresh -->
+                <div class="product-card" style="border-top: 4px solid #10b981;">
+                    <div class="product-image mint-bg">🌿</div>
+                    <h3>Breathe Fresh</h3>
+                    <p class="scent">Peppermint</p>
+                    <p class="benefit">Focus & Energy</p>
+                    <p class="description">Perfect for students, professionals, and athletes. Get sharp mental clarity and an energizing boost whenever you need it.</p>
+                    <p class="price">500 KSh</p>
+                    <button class="btn btn-primary add-to-cart" data-product="Breathe Fresh" data-price="500">Add to Cart</button>
+                </div>
+
+                <!-- Calm Clarity -->
+                <div class="product-card" style="border-top: 4px solid #a78bfa;">
+                    <div class="product-image lavender-bg">💜</div>
+                    <h3>Calm Clarity</h3>
+                    <p class="scent">Lavender</p>
+                    <p class="benefit">Relaxation & Stress Relief</p>
+                    <p class="description">Your moment of peace. Designed for wellness enthusiasts and meditation practitioners who value calm and grounding.</p>
+                    <p class="price">500 KSh</p>
+                    <button class="btn btn-primary add-to-cart" data-product="Calm Clarity" data-price="500">Add to Cart</button>
+                </div>
+
+                <!-- Tropical Vibes -->
+                <div class="product-card" style="border-top: 4px solid #f97316;">
+                    <div class="product-image tropical-bg">🌴</div>
+                    <h3>Tropical Vibes</h3>
+                    <p class="scent">Citrus</p>
+                    <p class="benefit">Mood & Uplift</p>
+                    <p class="description">Brighten your day with uplifting citrus vibes. Perfect for young professionals and anyone who needs a mood boost.</p>
+                    <p class="price">500 KSh</p>
+                    <button class="btn btn-primary add-to-cart" data-product="Tropical Vibes" data-price="500">Add to Cart</button>
+                </div>
+
+                <!-- Deep Relief -->
+                <div class="product-card" style="border-top: 4px solid #06b6d4;">
+                    <div class="product-image eucalyptus-bg">🌊</div>
+                    <h3>Deep Relief</h3>
+                    <p class="scent">Eucalyptus</p>
+                    <p class="benefit">Breathing & Wellness</p>
+                    <p class="description">Support your wellness journey with therapeutic eucalyptus. Designed for health-conscious individuals who prioritize natural wellness.</p>
+                    <p class="price">500 KSh</p>
+                    <button class="btn btn-primary add-to-cart" data-product="Deep Relief" data-price="500">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Phoria</h4>
+                    <p>Breathe in the Moment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://instagram.com" target="_blank">Instagram</a>
+                        <a href="https://wa.me/254" target="_blank">WhatsApp</a>
+                        <a href="https://tiktok.com" target="_blank">TikTok</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: hello@phoria.co.ke</p>
+                    <p>Phone: +254 XXX XXX XXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Phoria. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

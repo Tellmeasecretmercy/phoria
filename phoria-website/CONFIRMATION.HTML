@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Phoria</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Phoria</h1>
+                </div>
+                <nav class="nav">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- CONFIRMATION SECTION -->
+    <section class="confirmation-page">
+        <div class="container">
+            <div class="confirmation-content">
+                <div class="confirmation-icon">✓</div>
+                <h1>Thank You for Your Order!</h1>
+                <p class="confirmation-message">Your order has been received and is being prepared</p>
+
+                <div class="order-details">
+                    <div class="detail-row">
+                        <span>Order Number:</span>
+                        <span id="orderNumber" class="highlight">#ORD-2026-001</span>
+                    </div>
+                                        <div class="detail-row">
+                        <span>Order Date:</span>
+                        <span id="orderDate"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Total Amount:</span>
+                        <span id="confirmationTotal" class="highlight">0 KSh</span>
+                    </div>
+                </div>
+
+                <div class="order-items">
+                    <h2>Items Ordered</h2>
+                    <div id="confirmationItems"></div>
+                </div>
+
+                <div class="delivery-info">
+                    <h2>Delivery Information</h2>
+                    <div class="detail-row">
+                        <span>Delivery Address:</span>
+                        <span id="confirmationAddress"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Estimated Delivery:</span>
+                        <span>2-3 business days</span>
+                    </div>
+                </div>
+
+                <div class="next-steps">
+                    <h2>What's Next?</h2>
+                    <ol>
+                        <li>You'll receive an SMS confirmation shortly</li>
+                        <li>Payment instructions will be sent to your email</li>
+                        <li>Once payment is confirmed, your order will be dispatched</li>
+                        <li>You'll receive tracking updates via WhatsApp</li>
+                    </ol>
+                </div>
+
+                <div class="contact-section">
+                    <h2>Questions?</h2>
+                    <p>Contact us anytime:</p>
+                    <div class="contact-links">
+                        <a href="https://wa.me/254" class="btn btn-secondary">WhatsApp Us</a>
+                        <a href="mailto:hello@phoria.co.ke" class="btn btn-secondary">Email Us</a>
+                    </div>
+                </div>
+
+                <a href="products.html" class="btn btn-primary full-width">Continue Shopping</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Phoria</h4>
+                    <p>Breathe in the Moment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://instagram.com" target="_blank">Instagram</a>
+                        <a href="https://wa.me/254" target="_blank">WhatsApp</a>
+                        <a href="https://tiktok.com" target="_blank">TikTok</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: hello@phoria.co.ke</p>
+                    <p>Phone: +254 XXX XXX XXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Phoria. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
