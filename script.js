@@ -5,21 +5,8 @@
 const EMAIL_SERVICE_ID = 'service_vpbhwel';
 const EMAIL_TEMPLATE_ID = 'template_akov35m';
 
-// Initialize EmailJS when library is ready
-function initEmailJS() {
-    if (typeof emailjs !== 'undefined') {
-        emailjs.init('QHQOAgi9My9qzbDlg');
-        console.log('EmailJS initialized successfully');
-    } else {
-        console.warn('EmailJS library not loaded');
-        setTimeout(initEmailJS, 500); // Retry after 500ms
-    }
-}
-
 // EmailJS initialized in HTML
 console.log('EmailJS config loaded');
-
-
 
 
 /* ============================================
