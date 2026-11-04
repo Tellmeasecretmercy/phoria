@@ -38,7 +38,6 @@
     <section class="checkout-section">
         <div class="checkout-container">
             <form class="checkout-form" onsubmit="handleCheckout(event)">
-
                 <div class="form-section">
                     <h3>Shipping Information</h3>
                     <div class="form-group">
@@ -82,7 +81,6 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-full">Complete Order</button>
-
             </form>
 
             <div class="checkout-summary">
@@ -109,6 +107,10 @@
         </div>
     </footer>
 
+       <!-- LOAD EMAILJS FIRST -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+    
+    <!-- THEN LOAD SCRIPT.JS -->
     <script src="script.js"></script>
 </body>
 </html>
