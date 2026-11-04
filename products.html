@@ -38,7 +38,6 @@
     <!-- COLLECTION SELECTOR -->
     <section class="collection-selector" id="collectionSelector">
         <div class="collection-grid">
-
             <!-- Black and White Collection -->
             <div class="collection-card" onclick="filterCollection('blackandwhite')">
                 <img src="images/PHORIA Aromatic Smoke Still Life.png" alt="Black & White Collection">
@@ -65,7 +64,6 @@
                     <p>Clean and Whimsical</p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -94,18 +92,24 @@
         </div>
     </footer>
 
+    <!-- LOAD EMAILJS FIRST -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+    
+    <!-- THEN LOAD SCRIPT.JS -->
     <script src="script.js"></script>
+
+    <!-- THEN INLINE SCRIPT -->
     <script>
         function filterCollection(collection) {
             const selector = document.getElementById('collectionSelector');
             const productsSection = document.getElementById('productsSection');
             const collectionTitle = document.getElementById('collectionTitle');
             const productsGrid = document.getElementById('productsGrid');
-
+            
             // Hide selector, show products
             selector.style.display = 'none';
             productsSection.style.display = 'block';
-
+            
             // Set title
             if (collection === 'black') {
                 collectionTitle.textContent = 'Black Collection';
@@ -114,25 +118,33 @@
             } else if (collection === 'blackandwhite') {
                 collectionTitle.textContent = 'Black & White Collection';
             }
-
-            // Filter and display products
+            
+            // Filter and display products WITH STOCK CHECK
             const filteredProducts = products.filter(p => p.collection === collection);
-
-            productsGrid.innerHTML = filteredProducts.map(product => `
-                <div class="product-card">
-                    <div class="product-card-image">
-                        <img src="${product.image}" alt="${product.name}">
+            productsGrid.innerHTML = filteredProducts.map(product => {
+                const stock = inventory[product.id] || 0;
+                const outOfStock = stock <= 0;
+                
+                return `
+                    <div class="product-card ${outOfStock ? 'out-of-stock' : ''}">
+                        ${outOfStock ? '<div class="sold-out-badge">SOLD OUT</div>' : ''}
+                        <div class="product-card-image">
+                            <img src="${product.image}" alt="${product.name}" ${outOfStock ? 'style="opacity: 0.5;"' : ''}>
+                        </div>
+                        <div class="product-card-content">
+                            <h3>${product.name}</h3>
+                            <p class="scent">${product.scent}</p>
+                            <p class="benefit">${product.benefit}</p>
+                            <p class="price">KSh ${product.price}</p>
+                            ${outOfStock ? 
+                                '<button class="btn btn-outline" style="background: #ccc; color: #666; cursor: not-allowed;" disabled>Out of Stock</button>' :
+                                `<button class="btn btn-outline" onclick="addToCart(${product.id})">Add to Cart</button>`
+                            }
+                        </div>
                     </div>
-                    <div class="product-card-content">
-                        <h3>${product.name}</h3>
-                        <p class="scent">${product.scent}</p>
-                        <p class="benefit">${product.benefit}</p>
-                        <p class="price">KSh ${product.price}</p>
-                        <button class="btn btn-outline" onclick="addToCart(${product.id})">Add to Cart</button>
-                    </div>
-                </div>
-            `).join('');
-
+                `;
+            }).join('');
+            
             // Scroll to top
             window.scrollTo(0, 0);
         }
