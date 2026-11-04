@@ -8,78 +8,57 @@
 </head>
 <body>
     <!-- HEADER -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <h1>Phoria</h1>
-                </div>
-                <nav class="nav">
-                    <a href="index.html">Home</a>
-                    <a href="products.html">Products</a>
-                    <a href="about.html" class="active">About</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
-                <div class="cart-icon">
-                    <a href="cart.html">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
-                        <span class="cart-count" id="cartCount">0</span>
-                    </a>
-                </div>
-                <button class="menu-toggle" id="menuToggle">☰</button>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">PHORIA</a>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="products.html">SHOP THE COLLECTION</a>
+                <a href="feeling.html">THE FEELING</a>
+                <a href="about.html">ABOUT</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+            <a href="cart.html" class="cart-icon">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </header>
 
-    <nav class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <h1>About Phoria</h1>
+        <p>Our Story</p>
+    </section>
 
-    <!-- ABOUT SECTION -->
-    <section class="about-page">
-        <div class="container">
-            <h1>About Phoria</h1>
+    <!-- ABOUT CONTENT -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>Breathe in the Moment</h2>
+                <p>Phoria is a nasal inhaler brand designed for modern living. Whether you need focus for work, calm for stress relief, mood uplift for your day, or wellness support—Phoria is your daily companion.</p>
 
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Our Story</h2>
-                    <p>Phoria was born from a simple belief: everyone deserves a moment to breathe. In a world that moves fast, we created something that slows you down—just for a moment.</p>
-                    
-                    <p>We're not a medical company. We're a lifestyle brand designed for modern living. Whether you need focus for work, calm for stress relief, mood uplift for your day, or wellness support—Phoria is your daily companion.</p>
+                <p>We believe in simple, clean products that make you feel better. No complicated ingredients. No medical claims. Just pure, premium scents that enhance your daily moments.</p>
+            </div>
 
-                    <h2>Our Mission</h2>
-                    <p>To make wellness accessible, simple, and part of your everyday routine. We believe in natural ingredients, quality craftsmanship, and the power of a single breath to change your moment.</p>
-
-                    <h2>Why We Do This</h2>
-                    <p>Because life is made of moments. And every moment deserves to be lived fully. Phoria is here to help you breathe in each one.</p>
-                </div>
-
-                <div class="about-values">
-                    <h2>Our Values</h2>
-                    <div class="values-grid">
-                        <div class="value-item">
-                            <h3>Natural</h3>
-                            <p>Pure essential oils and natural ingredients</p>
-                        </div>
-                        <div class="value-item">
-                            <h3>Simple</h3>
-                            <p>No complicated formulas, just what works</p>
-                        </div>
-                        <div class="value-item">
-                            <h3>Local</h3>
-                            <p>Made in Kenya with pride</p>
-                        </div>
-                        <div class="value-item">
-                            <h3>Accessible</h3>
-                            <p>Wellness for everyone, not just the few</p>
-                        </div>
+            <div class="about-values">
+                <h3>Our Values</h3>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h4>Natural</h4>
+                        <p>Pure ingredients, premium quality</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>Simple</h4>
+                        <p>No fluff, just what works</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>Accessible</h4>
+                        <p>Wellness for everyone</p>
                     </div>
                 </div>
             </div>
@@ -87,30 +66,15 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Phoria</h4>
-                    <p>Breathe in the Moment</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="https://instagram.com" target="_blank">Instagram</a>
-                        <a href="https://wa.me/254" target="_blank">WhatsApp</a>
-                        <a href="https://tiktok.com" target="_blank">TikTok</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: hello@phoria.co.ke</p>
-                    <p>Phone: +254 XXX XXX XXX</p>
-                </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://wa.me/254" target="_blank">WhatsApp</a>
+                <a href="https://tiktok.com" target="_blank">TikTok</a>
+                <a href="contact.html">Contact</a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Phoria. All rights reserved.</p>
-            </div>
+            <p>&copy; 2026 Phoria. Breathe in the Moment.</p>
         </div>
     </footer>
 

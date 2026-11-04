@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Feeling - Phoria</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">PHORIA</a>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="products.html">SHOP THE COLLECTION</a>
+                <a href="feeling.html">THE FEELING</a>
+                <a href="about.html">ABOUT</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+            <a href="cart.html" class="cart-icon">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <h1>Find Your Moment</h1>
+        <p>Phoria for every part of your day</p>
+    </section>
+
+    <!-- MOMENTS SECTION -->
+    <section class="moments-section">
+        <div class="moments-container">
+
+            <!-- MOMENT 1: MORNING RITUAL -->
+            <div class="moment-card">
+                <div class="moment-image">
+                    <img src="images/white peppermint.jpeg" alt="Morning Ritual">
+                </div>
+                <div class="moment-content">
+                    <span class="moment-tag">Start Sharp</span>
+                    <h2>Wake up. Breathe in. Feel alive.</h2>
+                    <p class="moment-description">Start your day with clarity and energy. One breath sets the tone for everything ahead.</p>
+                    <p class="moment-product"><strong>Breathe Fresh</strong></p>
+                    <button class="btn btn-primary" onclick="shopMoment(1)">Shop This Moment</button>
+                </div>
+            </div>
+
+            <!-- MOMENT 2: WORK/FOCUS TIME -->
+            <div class="moment-card moment-card-reverse">
+                <div class="moment-image">
+                    <img src="images/white peppermint.jpeg" alt="Work Focus">
+                </div>
+                <div class="moment-content">
+                    <span class="moment-tag">Stay Focused</span>
+                    <h2>Midday pressure. Instant clarity.</h2>
+                    <p class="moment-description">Deadlines. Meetings. Distractions. One breath brings you back to sharp focus.</p>
+                    <p class="moment-product"><strong>Breathe Fresh</strong></p>
+                    <button class="btn btn-primary" onclick="shopMoment(1)">Shop This Moment</button>
+                </div>
+            </div>
+
+            <!-- MOMENT 3: AFTERNOON SLUMP -->
+            <div class="moment-card">
+                <div class="moment-image">
+                    <img src="images/white cinamon.jpeg" alt="Afternoon Slump">
+                </div>
+                <div class="moment-content">
+                    <span class="moment-tag">Lift Your Mood</span>
+                    <h2>That 3pm feeling. Gone.</h2>
+                    <p class="moment-description">Energy dip? Motivation low? Breathe in warmth. Breathe out the slump. Feel the lift.</p>
+                    <p class="moment-product"><strong>Spiced Warmth</strong></p>
+                    <button class="btn btn-primary" onclick="shopMoment(3)">Shop This Moment</button>
+                </div>
+            </div>
+
+            <!-- MOMENT 4: EVENING WIND DOWN -->
+            <div class="moment-card moment-card-reverse">
+                <div class="moment-image">
+                    <img src="images/white lavender.jpeg" alt="Evening Wind Down">
+                </div>
+                <div class="moment-content">
+                    <span class="moment-tag">Find Your Peace</span>
+                    <h2>Leave the day behind. Breathe.</h2>
+                    <p class="moment-description">Unwind. Meditate. Reflect. Find your center. One breath brings you home.</p>
+                    <p class="moment-product"><strong>Calm Clarity</strong></p>
+                    <button class="btn btn-primary" onclick="shopMoment(2)">Shop This Moment</button>
+                </div>
+            </div>
+
+            <!-- MOMENT 5: SOCIAL MOMENTS -->
+            <div class="moment-card">
+                <div class="moment-image">
+                    <img src="images/white strawberry.jpeg" alt="Social Moments">
+                </div>
+                <div class="moment-content">
+                    <span class="moment-tag">Feel Confident</span>
+                    <h2>Before the moment. Feel your best.</h2>
+                    <p class="moment-description">Before that meeting. Before that date. Before anything. Breathe in confidence naturally.</p>
+                    <p class="moment-product"><strong>Berry Boost</strong></p>
+                    <button class="btn btn-primary" onclick="shopMoment(4)">Shop This Moment</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="email-section">
+        <h2>Ready to Find Your Moment?</h2>
+        <p>Explore all collections and discover which Phoria moment is yours</p>
+        <a href="products.html" class="btn btn-primary">Shop The Collection</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://wa.me/254" target="_blank">WhatsApp</a>
+                <a href="https://tiktok.com" target="_blank">TikTok</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2026 Phoria. Breathe in the Moment.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function shopMoment(productId) {
+            addToCart(productId);
+            // Optional: Redirect to products page
+            // window.location.href = 'products.html';
+        }
+    </script>
+</body>
+</html>
