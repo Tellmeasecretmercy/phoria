@@ -107,15 +107,19 @@
         </div>
     </footer>
 
-         <!-- LOAD EMAILJS FIRST -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+         <!-- LOAD EMAILJS FROM DIFFERENT CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
     
     <!-- INITIALIZE EMAILJS -->
     <script>
-        if (typeof emailjs !== 'undefined') {
-            emailjs.init('QHQOAgi9My9qzbDlg');
-            console.log('EmailJS initialized successfully');
-        }
+        setTimeout(() => {
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init('QHQOAgi9My9qzbDlg');
+                console.log('✅ EmailJS initialized successfully');
+            } else {
+                console.error('❌ EmailJS library failed to load');
+            }
+        }, 500);
     </script>
     
     <!-- THEN LOAD SCRIPT.JS -->
