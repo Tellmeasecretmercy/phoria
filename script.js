@@ -1,4 +1,32 @@
 /* ============================================
+   EMAILJS CONFIG
+   ============================================ */
+
+const EMAIL_SERVICE_ID = 'service_vpbhwel';
+const EMAIL_TEMPLATE_ID = 'template_akov35m';
+
+// Initialize EmailJS when library is ready
+function initEmailJS() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init('QHQOAgi9My9qzbDlg');
+        console.log('EmailJS initialized successfully');
+    } else {
+        console.warn('EmailJS library not loaded');
+        setTimeout(initEmailJS, 500); // Retry after 500ms
+    }
+}
+
+// Call init when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEmailJS);
+} else {
+    initEmailJS();
+}
+
+
+
+
+/* ============================================
    GOOGLE SHEET CONFIG
    ============================================ */
 
@@ -13,7 +41,6 @@ async function loadInventory() {
         const data = await response.json();
         inventory = data;
         console.log('Inventory loaded:', inventory);
-        // Refresh product display after loading inventory
         refreshProductDisplay();
     } catch (error) {
         console.error('Error loading inventory:', error);
@@ -305,9 +332,10 @@ function displayProducts(collection) {
         `;
     }).join('');
 }
+
 function refreshProductDisplay() {
     const productsGrid = document.getElementById('productsGrid');
-    if (productsGrid && productsGrid.style.display !== 'none') {
+    if (productsGrid) {
         // Get current collection from title
         const collectionTitle = document.getElementById('collectionTitle');
         if (collectionTitle) {
@@ -426,7 +454,7 @@ async function handleCheckout(event) {
     }
     
     // Send email notification
-    sendOrderEmail(orderData);
+    await sendOrderEmail(orderData);
     
     // Send WhatsApp notification
     sendWhatsAppNotification(orderData);
@@ -459,46 +487,53 @@ async function updateInventorySheet(productId, quantity) {
     }
 }
 
-function sendOrderEmail(orderData) {
-    const emailContent = `
-        Order Number: ${orderData.orderNumber}
-        
-        Customer: ${orderData.firstName} ${orderData.lastName}
-        Email: ${orderData.email}
-        Phone: ${orderData.phone}
-        
-        Delivery Address: ${orderData.address}, ${orderData.city}
-        
-        Items:
-        ${orderData.items.map(item => `- ${item.name} (${item.scent}) x ${item.quantity} = KSh ${item.price * item.quantity}`).join('\n')}
-        
-        Total: KSh ${orderData.total}
-        Payment Method: ${orderData.paymentMethod}
-        
-        Order Date: ${orderData.date}
-    `;
-    
-    console.log('Order email would be sent:', emailContent);
+async function sendOrderEmail(orderData) {
+    try {
+        // Check if EmailJS is loaded
+        if (typeof emailjs === 'undefined') {
+            console.error('EmailJS not loaded');
+            showNotification('Order received! (Email pending)');
+            return;
+        }
+
+        const itemsList = orderData.items
+            .map(item => `• ${item.name} (${item.scent}) x ${item.quantity} = KSh ${(item.price * item.quantity).toLocaleString()}`)
+            .join('\n');
+
+        const emailParams = {
+            to_email: orderData.email,
+            customer_name: orderData.firstName,
+            order_number: orderData.orderNumber,
+            order_id: orderData.orderNumber,
+            total: orderData.total.toLocaleString(),
+            items_list: itemsList,
+            address: orderData.address,
+            city: orderData.city,
+            payment_method: orderData.paymentMethod === 'mpesa' ? 'M-Pesa' : 'Cash on Delivery',
+            phone: orderData.phone,
+            email: orderData.email
+        };
+
+        const response = await emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, emailParams);
+        console.log('Email sent successfully:', response);
+        showNotification('Order confirmation sent to your email!');
+    } catch (error) {
+        console.error('Error sending email:', error);
+        showNotification('Order received! (Email notification pending)');
+    }
 }
 
 function sendWhatsAppNotification(orderData) {
-    const whatsappMessage = `
-🎉 NEW ORDER - Phoria
+    const itemsList = orderData.items
+        .map(item => `• ${item.name} x ${item.quantity} = KSh ${(item.price * item.quantity).toLocaleString()}`)
+        .join('%0A');
 
-Order #: ${orderData.orderNumber}
-Customer: ${orderData.firstName} ${orderData.lastName}
-Phone: ${orderData.phone}
+    const message = `🎉 *NEW ORDER - Phoria*%0A%0AOrder #: ${orderData.orderNumber}%0ACustomer: ${orderData.firstName} ${orderData.lastName}%0APhone: ${orderData.phone}%0A%0AItems:%0A${itemsList}%0A%0ATotal: KSh ${orderData.total.toLocaleString()}%0APayment: ${orderData.paymentMethod === 'mpesa' ? 'M-Pesa' : 'Cash on Delivery'}%0A%0ADelivery: ${orderData.address}, ${orderData.city}`;
 
-Items:
-${orderData.items.map(item => `• ${item.name} x ${item.quantity} = KSh ${item.price * item.quantity}`).join('\n')}
-
-Total: KSh ${orderData.total}
-Payment: ${orderData.paymentMethod === 'mpesa' ? 'M-Pesa' : 'Cash on Delivery'}
-
-Delivery: ${orderData.address}, ${orderData.city}
-    `;
+    const whatsappLink = `https://wa.me/254722123456?text=${message}`;
     
-    console.log('WhatsApp notification:', whatsappMessage);
+    console.log('WhatsApp notification link:', whatsappLink);
+    console.log('WhatsApp message:', message);
 }
 
 /* ============================================
