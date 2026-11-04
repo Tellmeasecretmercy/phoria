@@ -16,12 +16,8 @@ function initEmailJS() {
     }
 }
 
-// Call init when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initEmailJS);
-} else {
-    initEmailJS();
-}
+// EmailJS initialized in HTML
+console.log('EmailJS config loaded');
 
 
 
