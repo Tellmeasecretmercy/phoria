@@ -13,10 +13,13 @@ async function loadInventory() {
         const data = await response.json();
         inventory = data;
         console.log('Inventory loaded:', inventory);
+        // Refresh product display after loading inventory
+        refreshProductDisplay();
     } catch (error) {
         console.error('Error loading inventory:', error);
         // Fallback to local inventory if sheet fails
         loadLocalInventory();
+        refreshProductDisplay();
     }
 }
 
@@ -183,6 +186,11 @@ function checkStock(productId, quantity = 1) {
     return true;
 }
 
+function isOutOfStock(productId) {
+    const stock = inventory[productId] || 0;
+    return stock <= 0;
+}
+
 /* ============================================
    CART MANAGEMENT
    ============================================ */
@@ -261,6 +269,57 @@ function updateCartCount() {
 function getCartTotal() {
     const cart = getCart();
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+/* ============================================
+   PRODUCT DISPLAY WITH STOCK STATUS
+   ============================================ */
+
+function displayProducts(collection) {
+    const filteredProducts = products.filter(p => p.collection === collection);
+    const productsGrid = document.getElementById('productsGrid');
+    
+    if (!productsGrid) return;
+    
+    productsGrid.innerHTML = filteredProducts.map(product => {
+        const stock = inventory[product.id] || 0;
+        const outOfStock = stock <= 0;
+        
+        return `
+            <div class="product-card ${outOfStock ? 'out-of-stock' : ''}">
+                ${outOfStock ? '<div class="sold-out-badge">SOLD OUT</div>' : ''}
+                <div class="product-card-image">
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='images/placeholder.jpg'" ${outOfStock ? 'style="opacity: 0.5;"' : ''}>
+                </div>
+                <div class="product-card-content">
+                    <h3>${product.name}</h3>
+                    <p class="scent">${product.scent}</p>
+                    <p class="benefit">${product.benefit}</p>
+                    <p class="price">KSh ${product.price}</p>
+                    ${outOfStock ? 
+                        '<button class="btn btn-outline" style="background: #ccc; color: #666; cursor: not-allowed;" disabled>Out of Stock</button>' :
+                        `<button class="btn btn-outline" onclick="addToCart(${product.id})">Add to Cart</button>`
+                    }
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+function refreshProductDisplay() {
+    const productsGrid = document.getElementById('productsGrid');
+    if (productsGrid && productsGrid.style.display !== 'none') {
+        // Get current collection from title
+        const collectionTitle = document.getElementById('collectionTitle');
+        if (collectionTitle) {
+            let collection = 'black';
+            if (collectionTitle.textContent.includes('White Collection')) {
+                collection = 'white';
+            } else if (collectionTitle.textContent.includes('Black & White')) {
+                collection = 'blackandwhite';
+            }
+            displayProducts(collection);
+        }
+    }
 }
 
 /* ============================================
@@ -619,6 +678,24 @@ style.textContent = `
             transform: translateX(400px);
             opacity: 0;
         }
+    }
+
+    .product-card.out-of-stock {
+        opacity: 0.7;
+        position: relative;
+    }
+
+    .sold-out-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #000;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        z-index: 10;
+        border-radius: 4px;
     }
 `;
 document.head.appendChild(style);
