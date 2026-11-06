@@ -1529,3 +1529,15 @@ footer p {
         font-size: 1.8rem;
     }
 }
+/* CHOOSE YOUR VIBE SECTION */
+.choose-vibe {
+    padding: 2rem;
+    text-align: center;
+    background-color: #fff;
+}
+
+.choose-vibe h2 {
+    font-size: 1.8rem;
+    color: #000;
+    font-weight: 600;
+}
