@@ -1495,8 +1495,8 @@ footer p {
     }
 
     .hero-image {
-        aspect-ratio: 1 / 1;
-    }
+    aspect-ratio: 16 / 9;
+}
 
     .showcase-content h2 {
         font-size: 1.8rem;
