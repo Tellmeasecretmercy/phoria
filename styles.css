@@ -1541,4 +1541,63 @@ footer p {
     .moment-content h2 {
         font-size: 1.3rem;
     }
+
+    /* ===== WHAT IS PHORIA MOBILE FIXES ===== */
+    .what-is-phoria {
+        padding: 2rem 1rem;
+    }
+
+    .what-is-phoria h2 {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .what-is-intro {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+
+    .what-is-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .what-is-text h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .what-is-text p {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .what-is-list li {
+        font-size: 0.9rem;
+        padding: 0.3rem 0;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .benefit-item {
+        padding: 1rem;
+    }
+
+    .benefit-icon {
+        font-size: 2rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .benefit-item h4 {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .benefit-item p {
+        font-size: 0.8rem;
+    }
 }
