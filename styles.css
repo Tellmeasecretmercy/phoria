@@ -177,7 +177,7 @@ header {
 }
 
 /* ============================================
-   HERO SECTION - FULL SCREEN IMAGE
+   HERO SECTION - DESKTOP
    ============================================ */
 
 .hero {
@@ -1348,7 +1348,7 @@ footer p {
 }
 
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - TABLET
    ============================================ */
 
 @media (max-width: 768px) {
@@ -1364,9 +1364,8 @@ footer p {
         width: 100%;
     }
 
-     .hero-image {
-        aspect-ratio: auto;
-        max-height: 400px;
+    .hero-image {
+        aspect-ratio: 16 / 9;
     }
 
     .product-showcase {
@@ -1482,6 +1481,10 @@ footer p {
     }
 }
 
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================ */
+
 @media (max-width: 480px) {
     .header-container {
         padding: 0 1rem;
@@ -1495,11 +1498,54 @@ footer p {
         gap: 1.5rem;
     }
 
-     .hero-image {
-        aspect-ratio: auto;
-        max-height: 300px;
+    /* ===== HERO SECTION - MOBILE TEXT HERO ===== */
+    .hero {
+        padding: 3rem 1rem;
+        background: var(--light-gray);
     }
 
+    .hero-image {
+        display: none;
+    }
+
+    .hero-content {
+        display: block;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        display: block;
+        font-size: 2rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        color: var(--primary-black);
+        line-height: 1.2;
+    }
+
+    .hero-content p {
+        display: block;
+        font-size: 1rem;
+        color: var(--medium-gray);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-content .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--primary-black);
+        color: var(--primary-white);
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .hero-content .btn:hover {
+        background: var(--dark-gray);
+        transform: translateY(-2px);
+    }
+
+    /* ===== PRODUCT SHOWCASE - MOBILE ===== */
     .showcase-content h2 {
         font-size: 1.8rem;
     }
@@ -1544,7 +1590,7 @@ footer p {
         font-size: 1.3rem;
     }
 
-    /* ===== WHAT IS PHORIA MOBILE FIXES ===== */
+    /* ===== WHAT IS PHORIA - MOBILE ===== */
     .what-is-phoria {
         padding: 2rem 1rem;
     }
@@ -1603,3 +1649,4 @@ footer p {
         font-size: 0.8rem;
     }
 }
+
