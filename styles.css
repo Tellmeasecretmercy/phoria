@@ -1364,8 +1364,9 @@ footer p {
         width: 100%;
     }
 
-    .hero-image {
-        aspect-ratio: 1 / 1;
+     .hero-image {
+        aspect-ratio: auto;
+        max-height: 400px;
     }
 
     .product-showcase {
@@ -1494,9 +1495,10 @@ footer p {
         gap: 1.5rem;
     }
 
-    .hero-image {
-    aspect-ratio: 16 / 9;
-}
+     .hero-image {
+        aspect-ratio: auto;
+        max-height: 300px;
+    }
 
     .showcase-content h2 {
         font-size: 1.8rem;
