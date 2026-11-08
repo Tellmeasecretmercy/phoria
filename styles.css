@@ -1350,7 +1350,6 @@ footer p {
 /* ============================================
    RESPONSIVE DESIGN - TABLET
    ============================================ */
-
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -1366,6 +1365,7 @@ footer p {
 
     .hero-image {
         aspect-ratio: 16 / 9;
+        display: block;
     }
 
     .product-showcase {
