@@ -1498,68 +1498,81 @@ footer p {
         gap: 1.5rem;
     }
 
-    /* ===== HERO SECTION - MOBILE TEXT HERO ===== */
+    /* ===== HERO SECTION - KEEP IMAGE ===== */
     .hero {
-        padding: 3rem 1rem;
-        background: var(--light-gray);
+        padding: 0;
+        background: transparent;
     }
 
     .hero-image {
-        display: none;
+        display: block;
+        aspect-ratio: 16 / 9;
+        width: 100%;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 
     .hero-content {
-        display: block;
-        text-align: center;
-    }
-
-    .hero-content h1 {
-        display: block;
-        font-size: 2rem;
-        font-weight: 900;
-        margin-bottom: 1rem;
-        color: var(--primary-black);
-        line-height: 1.2;
-    }
-
-    .hero-content p {
-        display: block;
-        font-size: 1rem;
-        color: var(--medium-gray);
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-content .btn {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: var(--primary-black);
-        color: var(--primary-white);
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    .hero-content .btn:hover {
-        background: var(--dark-gray);
-        transform: translateY(-2px);
+        display: none;
     }
 
     /* ===== PRODUCT SHOWCASE - MOBILE ===== */
+    .product-showcase {
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+    }
+
+    .showcase-image {
+        aspect-ratio: 1 / 1;
+    }
+
     .showcase-content h2 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 
+    .showcase-content p {
+        font-size: 0.95rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+    }
+
+    .benefits li {
+        font-size: 0.9rem;
+    }
+
+    /* ===== PAGE HERO - MOBILE ===== */
     .page-hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 
+    .page-hero p {
+        font-size: 0.95rem;
+    }
+
+    /* ===== WHY SECTION - MOBILE ===== */
     .why-section h2,
     .testimonials h2,
     .email-section h2 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
     }
 
+    .why-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .why-card p {
+        font-size: 0.9rem;
+    }
+
+    /* ===== CART ITEM - MOBILE ===== */
     .cart-item {
         flex-direction: column;
         gap: 1rem;
@@ -1569,19 +1582,21 @@ footer p {
         text-align: left;
     }
 
+    /* ===== COLLECTION - MOBILE ===== */
     .collection-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
     .collection-overlay h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .collection-overlay p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
+    /* ===== MOMENT CARD - MOBILE ===== */
     .moment-card {
         grid-template-columns: 1fr;
     }
@@ -1590,19 +1605,23 @@ footer p {
         font-size: 1.3rem;
     }
 
+    .moment-description {
+        font-size: 0.95rem;
+    }
+
     /* ===== WHAT IS PHORIA - MOBILE ===== */
     .what-is-phoria {
         padding: 2rem 1rem;
     }
 
     .what-is-phoria h2 {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         margin-bottom: 0.8rem;
     }
 
     .what-is-intro {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
     }
 
     .what-is-content {
@@ -1612,17 +1631,18 @@ footer p {
     }
 
     .what-is-text h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.6rem;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .what-is-text p {
-        font-size: 0.9rem;
-        margin-bottom: 0.8rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.7rem;
+        line-height: 1.5;
     }
 
     .what-is-list li {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         padding: 0.3rem 0;
     }
 
@@ -1636,17 +1656,137 @@ footer p {
     }
 
     .benefit-icon {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin-bottom: 0.3rem;
     }
 
     .benefit-item h4 {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         margin-bottom: 0.2rem;
     }
 
     .benefit-item p {
+        font-size: 0.75rem;
+    }
+
+    /* ===== CHOOSE YOUR VIBE - HIDE ON MOBILE ===== */
+    .choose-vibe {
+        display: none;
+    }
+
+    /* ===== TESTIMONIALS - MOBILE ===== */
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+
+    .testimonial-card p {
+        font-size: 0.9rem;
+    }
+
+    .author {
+        font-size: 0.85rem;
+    }
+
+    /* ===== EMAIL SECTION - MOBILE ===== */
+    .email-section {
+        padding: 3rem 1rem;
+    }
+
+    .email-form {
+        flex-direction: column;
+    }
+
+    .email-form input,
+    .email-form button {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    /* ===== CONTACT - MOBILE ===== */
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .contact-method h4 {
+        font-size: 0.95rem;
+    }
+
+    /* ===== ABOUT - MOBILE ===== */
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+
+    .about-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .about-text p {
+        font-size: 0.9rem;
+    }
+
+    .about-values h3 {
+        font-size: 1.3rem;
+    }
+
+    .value-card h4 {
+        font-size: 1rem;
+    }
+
+    .value-card p {
+        font-size: 0.85rem;
+    }
+
+    /* ===== CHECKOUT - MOBILE ===== */
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+
+    .form-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9rem;
+    }
+
+    /* ===== CART - MOBILE ===== */
+    .cart-container {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-item-details h3 {
+        font-size: 0.95rem;
+    }
+
+    .cart-item-details p {
         font-size: 0.8rem;
     }
-}
 
+    /* ===== CONFIRMATION - MOBILE ===== */
+    .confirmation-section {
+        padding: 3rem 1rem;
+    }
+
+    .confirmation-section h1 {
+        font-size: 1.8rem;
+    }
+
+    .confirmation-details h3,
+    .confirmation-next-steps h3 {
+        font-size: 1rem;
+    }
+
+    .confirmation-detail-row,
+    .confirmation-next-steps li {
+        font-size: 0.85rem;
+    }
+}
