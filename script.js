@@ -2,7 +2,7 @@
    APPS SCRIPT CONFIG
    ============================================ */
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJkF91_983kqMuEP9mcCgiSGeOwO2lEPKoPu2JbKuY-DKON8GYeE6p6PlNScqTWtDH/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFNSMJtA8r7BYDTbKakNVh1vA-syQ97zjJK663TDf_twGsw_LJ9U6KHz5KmN2kegt5/exec';
 const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwgJvBSXRtrxHce2QlObBEmIqrBiFKe2_hpXQa3M5rEuJenpFU4Xwg00a2q2nEyS1Ar/exec';
 
 let inventory = {};
