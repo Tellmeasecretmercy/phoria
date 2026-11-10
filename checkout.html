@@ -1,129 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Phoria</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- HEADER -->
-    <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">PHORIA</a>
-            <nav class="nav-menu">
-                <a href="index.html">Home</a>
-                <a href="products.html">SHOP THE COLLECTION</a>
-                <a href="feeling.html">THE FEELING</a>
-                <a href="about.html">ABOUT</a>
-                <a href="contact.html">CONTACT</a>
-            </nav>
-            <a href="cart.html" class="cart-icon">
-                🛒 <span class="cart-count" id="cart-count">0</span>
-            </a>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
+<!-- CHECKOUT FORM -->
+<section class="checkout-section">
+    <div class="checkout-container">
 
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-        <h1>Checkout</h1>
-    </section>
+        <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
 
-    <!-- CHECKOUT FORM -->
-    <section class="checkout-section">
-        <div class="checkout-container">
-            <form class="checkout-form" onsubmit="handleCheckout(event)">
-                <div class="form-section">
-                    <h3>Shipping Information</h3>
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" id="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" id="lastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Delivery Address</label>
-                        <input type="text" id="address" required>
-                    </div>
-                    <div class="form-group">
-                        <label>City/Region</label>
-                        <input type="text" id="city" required>
-                    </div>
+            <div class="form-section">
+                <h3>Shipping Information</h3>
+
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
                 </div>
 
-                <div class="form-section">
-                    <h3>Payment Method</h3>
-                    <div class="payment-options">
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="mpesa" checked>
-                            <span>M-Pesa</span>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="cod">
-                            <span>Cash on Delivery</span>
-                        </label>
-                    </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-full">Complete Order</button>
-            </form>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
-            <div class="checkout-summary">
-                <h3>Order Summary</h3>
-                <div id="checkout-items"></div>
-                <div class="summary-row summary-total">
-                    <span>Total</span>
-                    <span id="checkout-total">KSh 0</span>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+
+                <div class="form-group">
+                    <label>City/Region</label>
+                    <input type="text" id="city" name="city" required>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="https://instagram.com" target="_blank">Instagram</a>
-                <a href="https://wa.me/254" target="_blank">WhatsApp</a>
-                <a href="https://tiktok.com" target="_blank">TikTok</a>
-                <a href="contact.html">Contact</a>
+            <div class="form-section">
+                <h3>Payment Method</h3>
+
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="mpesa" checked>
+                        <span>M-Pesa</span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="cod">
+                        <span>Cash on Delivery</span>
+                    </label>
+                </div>
             </div>
-            <p>&copy; 2026 Phoria. Breathe in the Moment.</p>
+
+            <button type="submit" class="btn btn-primary btn-full">Complete Order</button>
+
+        </form>
+
+        <div class="checkout-summary">
+            <h3>Order Summary</h3>
+            <div id="checkout-items"></div>
+            <div class="summary-row summary-total">
+                <span>Total</span>
+                <span id="checkout-total">KSh 0</span>
+            </div>
         </div>
-    </footer>
 
-         <!-- LOAD EMAILJS FROM DIFFERENT CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
-    
-    <!-- INITIALIZE EMAILJS -->
-    <script>
-        setTimeout(() => {
-            if (typeof emailjs !== 'undefined') {
-                emailjs.init('QHQOAgi9My9qzbDlg');
-                console.log('✅ EmailJS initialized successfully');
-            } else {
-                console.error('❌ EmailJS library failed to load');
-            }
-        }, 500);
-    </script>
-    
-    <!-- THEN LOAD SCRIPT.JS -->
-    <script src="script.js"></script>
-</body>
-</html>
-
+    </div>
+</section>

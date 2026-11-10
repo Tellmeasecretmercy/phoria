@@ -1,23 +1,8 @@
 /* ============================================
-   EMAILJS CONFIG
+   APPS SCRIPT CONFIG
    ============================================ */
 
-const EMAIL_SERVICE_ID = 'service_vpbhwel';
-const EMAIL_TEMPLATE_ID = 'template_akov35m';
-
-// Initialize EmailJS if library is available
-if (typeof emailjs !== 'undefined') {
-    emailjs.init('QHQOAgi9My9qzbDlg');
-    console.log('EmailJS initialized in script.js');
-} else {
-    console.log('EmailJS library not available on this page');
-}
-
-
-/* ============================================
-   GOOGLE SHEET CONFIG
-   ============================================ */
-
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJkF91_983kqMuEP9mcCgiSGeOwO2lEPKoPu2JbKuY-DKON8GYeE6p6PlNScqTWtDH/exec';
 const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwgJvBSXRtrxHce2QlObBEmIqrBiFKe2_hpXQa3M5rEuJenpFU4Xwg00a2q2nEyS1Ar/exec';
 
 let inventory = {};
@@ -28,11 +13,10 @@ async function loadInventory() {
         const response = await fetch(`${GOOGLE_APPS_SCRIPT_URL}?action=getInventory`);
         const data = await response.json();
         inventory = data;
-        console.log('Inventory loaded:', inventory);
+        console.log('✅ Inventory loaded:', inventory);
         refreshProductDisplay();
     } catch (error) {
-        console.error('Error loading inventory:', error);
-        // Fallback to local inventory if sheet fails
+        console.error('❌ Error loading inventory:', error);
         loadLocalInventory();
         refreshProductDisplay();
     }
@@ -40,18 +24,18 @@ async function loadInventory() {
 
 function loadLocalInventory() {
     inventory = {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 50,
-        6: 10,
-        7: 10,
-        8: 30,
-        9: 0,
-        10: 0,
-        11: 0,
-        12: 0
+        1: 7,
+        2: 10,
+        3: 10,
+        4: 10,
+        5: 47,
+        6: 6,
+        7: 5,
+        8: 28,
+        9: 7,
+        10: 10,
+        11: 10,
+        12: 10
     };
 }
 
@@ -184,7 +168,7 @@ function checkStock(productId, quantity = 1) {
     const stock = inventory[productId] || 0;
     
     if (!product) {
-        console.error('Product not found');
+        console.error('❌ Product not found');
         return false;
     }
     
@@ -221,18 +205,15 @@ function saveCart(cart) {
 }
 
 function addToCart(productId) {
-    // CHECK STOCK FIRST
     if (!checkStock(productId)) {
         return;
     }
-
+    
     const cart = getCart();
     const product = products.find(p => p.id === productId);
-    
     const existingItem = cart.find(item => item.id === productId);
     
     if (existingItem) {
-        // Check if adding more would exceed stock
         if (!checkStock(productId, existingItem.quantity + 1)) {
             return;
         }
@@ -245,7 +226,7 @@ function addToCart(productId) {
     }
     
     saveCart(cart);
-    showNotification('Added to cart!');
+    showNotification('✅ Added to cart!');
 }
 
 function removeFromCart(productId) {
@@ -263,7 +244,6 @@ function updateQuantity(productId, quantity) {
         if (quantity <= 0) {
             removeFromCart(productId);
         } else {
-            // Check stock before updating
             if (!checkStock(productId, quantity)) {
                 return;
             }
@@ -324,7 +304,6 @@ function displayProducts(collection) {
 function refreshProductDisplay() {
     const productsGrid = document.getElementById('productsGrid');
     if (productsGrid) {
-        // Get current collection from title
         const collectionTitle = document.getElementById('collectionTitle');
         if (collectionTitle) {
             let collection = 'black';
@@ -355,8 +334,10 @@ function displayCart() {
                 <a href="products.html" class="btn btn-primary">Continue Shopping</a>
             </div>
         `;
-        document.getElementById('subtotal').textContent = 'KSh 0';
-        document.getElementById('total').textContent = 'KSh 0';
+        const subtotalEl = document.getElementById('subtotal');
+        const totalEl = document.getElementById('total');
+        if (subtotalEl) subtotalEl.textContent = 'KSh 0';
+        if (totalEl) totalEl.textContent = 'KSh 0';
         return;
     }
     
@@ -380,8 +361,10 @@ function displayCart() {
     `).join('');
     
     const subtotal = getCartTotal();
-    document.getElementById('subtotal').textContent = `KSh ${subtotal.toLocaleString()}`;
-    document.getElementById('total').textContent = `KSh ${subtotal.toLocaleString()}`;
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+    if (subtotalEl) subtotalEl.textContent = `KSh ${subtotal.toLocaleString()}`;
+    if (totalEl) totalEl.textContent = `KSh ${subtotal.toLocaleString()}`;
 }
 
 /* ============================================
@@ -402,126 +385,108 @@ function displayCheckoutItems() {
     `).join('');
     
     const total = getCartTotal();
-    document.getElementById('checkout-total').textContent = `KSh ${total.toLocaleString()}`;
+    const checkoutTotalEl = document.getElementById('checkout-total');
+    if (checkoutTotalEl) checkoutTotalEl.textContent = `KSh ${total.toLocaleString()}`;
 }
 
 async function handleCheckout(event) {
     event.preventDefault();
     
+    const cart = getCart();
+    
+    if (cart.length === 0) {
+        showNotification('❌ Your cart is empty!');
+        return;
+    }
+    
+    // Get form data
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
     const address = document.getElementById('address').value;
     const city = document.getElementById('city').value;
-    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
     
-    const cart = getCart();
     const total = getCartTotal();
     
-    const orderData = {
-        orderNumber: 'PHO-' + Date.now(),
-        firstName,
-        lastName,
-        email,
-        phone,
-        address,
-        city,
-        paymentMethod,
-        items: cart,
-        total,
-        date: new Date().toLocaleDateString()
-    };
+    // Build products string
+    let productsText = '';
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        productsText += `${item.name} (${item.scent}) x${item.quantity} = KSh ${itemTotal}\n`;
+    });
     
-    // Save order to localStorage
-    localStorage.setItem('phoriaOrder', JSON.stringify(orderData));
+    // Show loading
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = '⏳ Processing...';
+    submitBtn.disabled = true;
     
-    // Update inventory in Google Sheet
-    for (const item of cart) {
-        await updateInventorySheet(item.id, item.quantity);
-    }
-    
-    // Send email notification
-    await sendOrderEmail(orderData);
-    
-    // Send WhatsApp notification
-    sendWhatsAppNotification(orderData);
-    
-    // Clear cart
-    localStorage.removeItem('phoriaCart');
-    updateCartCount();
-    
-    // Redirect to confirmation
-    window.location.href = 'confirmation.html';
-}
-
-async function updateInventorySheet(productId, quantity) {
     try {
-        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-            method: 'POST',
-            body: new URLSearchParams({
-                action: 'updateStock',
-                productId: productId,
-                quantity: quantity
-            })
-        });
-        const data = await response.json();
-        console.log('Inventory updated:', data);
+        // Prepare FormData
+        const formData = new FormData();
+        formData.append('firstName', firstName);
+        formData.append('lastName', lastName);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('address', address);
+        formData.append('city', city);
+        formData.append('paymentMethod', paymentMethod);
+        formData.append('products', productsText);
+        formData.append('total', total);
+        formData.append('cartItems', JSON.stringify(cart));
         
-        // Update local inventory
-        inventory[productId] = (inventory[productId] || 0) - quantity;
-    } catch (error) {
-        console.error('Error updating inventory:', error);
-    }
-}
-
-async function sendOrderEmail(orderData) {
-    try {
-        // Check if EmailJS is loaded
-        if (typeof emailjs === 'undefined') {
-            console.error('EmailJS not loaded');
-            showNotification('Order received! (Email pending)');
-            return;
+        // Send to Apps Script
+        const response = await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Save order locally
+            const orderData = {
+                orderNumber: data.orderNumber,
+                firstName,
+                lastName,
+                email,
+                phone,
+                address,
+                city,
+                paymentMethod,
+                items: cart,
+                total,
+                date: new Date().toLocaleDateString()
+            };
+            localStorage.setItem('phoriaOrder', JSON.stringify(orderData));
+            
+            // Show success
+            showNotification(`✅ Order Received! ${data.orderNumber}`);
+            
+            // Clear cart
+            localStorage.removeItem('phoriaCart');
+            updateCartCount();
+            
+            // Reset form
+            event.target.reset();
+            
+            // Redirect to confirmation
+            setTimeout(() => {
+                window.location.href = `confirmation.html?orderNumber=${data.orderNumber}`;
+            }, 1500);
+        } else {
+            showNotification(`❌ Error: ${data.error}`);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
         }
-
-        const itemsList = orderData.items
-            .map(item => `• ${item.name} (${item.scent}) x ${item.quantity} = KSh ${(item.price * item.quantity).toLocaleString()}`)
-            .join('\n');
-
-        const emailParams = {
-            to_email: orderData.email,
-            customer_name: orderData.firstName,
-            order_number: orderData.orderNumber,
-            order_id: orderData.orderNumber,
-            total: orderData.total.toLocaleString(),
-            items_list: itemsList,
-            address: orderData.address,
-            city: orderData.city,
-            payment_method: orderData.paymentMethod === 'mpesa' ? 'M-Pesa' : 'Cash on Delivery',
-            phone: orderData.phone,
-            email: orderData.email
-        };
-
-        const response = await emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, emailParams);
-        console.log('Email sent successfully:', response);
-        showNotification('Order confirmation sent to your email!');
     } catch (error) {
-        console.error('Error sending email:', error);
-        showNotification('Order received! (Email notification pending)');
+        console.error('❌ Error:', error);
+        showNotification(`❌ Error submitting order: ${error}`);
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
     }
-}
-
-function sendWhatsAppNotification(orderData) {
-    const itemsList = orderData.items
-        .map(item => `• ${item.name} x ${item.quantity} = KSh ${(item.price * item.quantity).toLocaleString()}`)
-        .join('%0A');
-
-    const message = `🎉 *NEW ORDER - Phoria*%0A%0AOrder #: ${orderData.orderNumber}%0ACustomer: ${orderData.firstName} ${orderData.lastName}%0APhone: ${orderData.phone}%0A%0AItems:%0A${itemsList}%0A%0ATotal: KSh ${orderData.total.toLocaleString()}%0APayment: ${orderData.paymentMethod === 'mpesa' ? 'M-Pesa' : 'Cash on Delivery'}%0A%0ADelivery: ${orderData.address}, ${orderData.city}`;
-
-    const whatsappLink = `https://wa.me/254722123456?text=${message}`;
-    
-    console.log('WhatsApp notification link:', whatsappLink);
-    console.log('WhatsApp message:', message);
 }
 
 /* ============================================
@@ -536,7 +501,7 @@ function displayConfirmation() {
     const orderData = JSON.parse(localStorage.getItem('phoriaOrder'));
     
     if (!orderData) {
-        confirmationDetails.innerHTML = '<p>No order found</p>';
+        confirmationDetails.innerHTML = '<p>❌ No order found</p>';
         return;
     }
     
@@ -592,11 +557,9 @@ function handleEmailCapture(event) {
     });
     localStorage.setItem('phoriaEmails', JSON.stringify(emails));
     
-    showNotification('Thanks! Check your email for 10% off');
-    
+    showNotification('✅ Thanks! Check your email for 10% off');
     event.target.reset();
-    
-    console.log('Email captured:', email);
+    console.log('📧 Email captured:', email);
 }
 
 /* ============================================
@@ -620,11 +583,9 @@ function handleContact(event) {
     });
     localStorage.setItem('phoriaContacts', JSON.stringify(contacts));
     
-    showNotification('Message sent! We\'ll get back to you soon');
-    
+    showNotification('✅ Message sent! We\'ll get back to you soon');
     event.target.reset();
-    
-    console.log('Contact message:', { name, email, message });
+    console.log('💬 Contact message:', { name, email, message });
 }
 
 /* ============================================
@@ -643,6 +604,7 @@ function showNotification(message) {
         border-radius: 8px;
         z-index: 10000;
         animation: slideIn 0.3s ease;
+        font-weight: 500;
     `;
     notification.textContent = message;
     document.body.appendChild(notification);
@@ -702,12 +664,12 @@ style.textContent = `
             opacity: 0;
         }
     }
-
+    
     .product-card.out-of-stock {
         opacity: 0.7;
         position: relative;
     }
-
+    
     .sold-out-badge {
         position: absolute;
         top: 10px;
@@ -728,10 +690,12 @@ document.head.appendChild(style);
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Load inventory from Google Sheet
+    console.log('🚀 Phoria App Initialized');
+    
+    // Load inventory
     loadInventory();
     
-    // Update cart count on page load
+    // Update cart count
     updateCartCount();
     
     // Display cart if on cart page
