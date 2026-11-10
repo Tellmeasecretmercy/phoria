@@ -392,7 +392,10 @@ function displayCheckoutItems() {
 async function handleCheckout(event) {
     event.preventDefault();
     
+    console.log('🔍 === CHECKOUT DEBUG START ===');
+    
     const cart = getCart();
+    console.log('📦 Cart:', cart);
     
     if (cart.length === 0) {
         showNotification('❌ Your cart is empty!');
@@ -400,15 +403,46 @@ async function handleCheckout(event) {
     }
     
     // Get form data
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const address = document.getElementById('address').value;
-    const city = document.getElementById('city').value;
-    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    const firstName = document.getElementById('firstName')?.value || '';
+    const lastName = document.getElementById('lastName')?.value || '';
+    const email = document.getElementById('email')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+    const address = document.getElementById('address')?.value || '';
+    const city = document.getElementById('city')?.value || '';
+    
+    console.log('📋 Form data:', { firstName, lastName, email, phone, address, city });
+    
+    // DEBUG: Check all radio buttons
+    const allRadios = document.querySelectorAll('input[type="radio"]');
+    console.log('📻 Total radio buttons on page:', allRadios.length);
+    
+    // DEBUG: Check payment radios specifically
+    const paymentRadios = document.querySelectorAll('input[name="payment"]');
+    console.log('💳 Payment radios found:', paymentRadios.length);
+    paymentRadios.forEach((radio, index) => {
+        console.log(`  Radio ${index}: value="${radio.value}", checked=${radio.checked}`);
+    });
+    
+    // Get payment method with fallback
+    let paymentMethod = 'mpesa'; // Default
+    const paymentMethodElement = document.querySelector('input[name="payment"]:checked');
+    
+    if (paymentMethodElement) {
+        paymentMethod = paymentMethodElement.value;
+        console.log('✅ Payment method selected:', paymentMethod);
+    } else {
+        console.warn('⚠️ No payment method checked, using default: mpesa');
+        // Try to auto-select first radio
+        const firstRadio = document.querySelector('input[name="payment"]');
+        if (firstRadio) {
+            firstRadio.checked = true;
+            paymentMethod = firstRadio.value;
+            console.log('✅ Auto-selected first radio:', paymentMethod);
+        }
+    }
     
     const total = getCartTotal();
+    console.log('💰 Total:', total);
     
     // Build products string
     let productsText = '';
@@ -416,6 +450,9 @@ async function handleCheckout(event) {
         const itemTotal = item.price * item.quantity;
         productsText += `${item.name} (${item.scent}) x${item.quantity} = KSh ${itemTotal}\n`;
     });
+    
+    console.log('📝 Products text:', productsText);
+    console.log('🔍 === CHECKOUT DEBUG END ===');
     
     // Show loading
     const submitBtn = event.target.querySelector('button[type="submit"]');
@@ -437,6 +474,8 @@ async function handleCheckout(event) {
         formData.append('total', total);
         formData.append('cartItems', JSON.stringify(cart));
         
+        console.log('🚀 Sending to Apps Script:', APPS_SCRIPT_URL);
+        
         // Send to Apps Script
         const response = await fetch(APPS_SCRIPT_URL, {
             method: 'POST',
@@ -444,6 +483,7 @@ async function handleCheckout(event) {
         });
         
         const data = await response.json();
+        console.log('📨 Response from Apps Script:', data);
         
         if (data.success) {
             // Save order locally
