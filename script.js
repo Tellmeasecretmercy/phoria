@@ -530,50 +530,70 @@ async function handleCheckout(event) {
 
 function displayConfirmation() {
     const confirmationDetails = document.getElementById('confirmation-details');
+    const orderNumberEl = document.getElementById('order-number');
+    const paymentStatusEl = document.getElementById('payment-status');
     
     if (!confirmationDetails) return;
     
     const orderData = JSON.parse(localStorage.getItem('phoriaOrder'));
     
     if (!orderData) {
-        confirmationDetails.innerHTML = '<p>❌ No order found</p>';
+        confirmationDetails.innerHTML = '<p>No order found</p>';
         return;
     }
     
+    // Display order number
+    if (orderNumberEl) {
+        orderNumberEl.textContent = orderData.orderNumber;
+    }
+    
+    // Display order details
     confirmationDetails.innerHTML = `
         <div class="confirmation-detail-row">
-            <strong>Order Number:</strong>
-            <span>${orderData.orderNumber}</span>
-        </div>
-        <div class="confirmation-detail-row">
-            <strong>Customer:</strong>
+            <strong>Customer</strong>
             <span>${orderData.firstName} ${orderData.lastName}</span>
         </div>
         <div class="confirmation-detail-row">
-            <strong>Email:</strong>
+            <strong>Email</strong>
             <span>${orderData.email}</span>
         </div>
         <div class="confirmation-detail-row">
-            <strong>Phone:</strong>
+            <strong>Phone</strong>
             <span>${orderData.phone}</span>
         </div>
         <div class="confirmation-detail-row">
-            <strong>Delivery Address:</strong>
+            <strong>Delivery Address</strong>
             <span>${orderData.address}, ${orderData.city}</span>
         </div>
         <div class="confirmation-detail-row">
-            <strong>Payment Method:</strong>
-            <span>${orderData.paymentMethod === 'mpesa' ? 'M-Pesa' : 'Cash on Delivery'}</span>
+            <strong>Items</strong>
+            <span>${orderData.items.length} item(s)</span>
         </div>
-        <div class="confirmation-detail-row">
-            <strong>Items:</strong>
-            <span>${orderData.items.map(item => `${item.name} x ${item.quantity}`).join(', ')}</span>
-        </div>
-        <div class="confirmation-detail-row">
-            <strong>Total:</strong>
-            <span>KSh ${orderData.total.toLocaleString()}</span>
+        <div class="confirmation-detail-row" style="border-bottom: 2px solid #000; padding-bottom: 1rem; margin-bottom: 1rem;">
+            <strong style="font-size: 1.1rem;">Total</strong>
+            <span style="font-size: 1.1rem; font-weight: 700;">KSh ${orderData.total.toLocaleString()}</span>
         </div>
     `;
+    
+    // Display payment status
+    if (paymentStatusEl) {
+        if (orderData.paymentMethod === 'mpesa') {
+            paymentStatusEl.innerHTML = `
+                <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                    <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #2e7d32;">M-Pesa Payment Required</p>
+                    <p style="margin: 0; color: #666; font-size: 0.95rem;">Send KSh ${orderData.total} to <strong>+254 114445264</strong></p>
+                    <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Reference: ${orderData.orderNumber}</p>
+                </div>
+            `;
+        } else {
+            paymentStatusEl.innerHTML = `
+                <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                    <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #e65100;">Cash on Delivery</p>
+                    <p style="margin: 0; color: #666; font-size: 0.95rem;">We'll collect KSh ${orderData.total} upon delivery</p>
+                </div>
+            `;
+        }
+    }
 }
 
 /* ============================================

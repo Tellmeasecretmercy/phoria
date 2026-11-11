@@ -1,79 +1,171 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Order Confirmed - Phoria</title>
+
     <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
+
     <!-- HEADER -->
+
     <header>
+
         <div class="header-container">
+
             <a href="index.html" class="logo">PHORIA</a>
+
             <nav class="nav-menu">
+
                 <a href="index.html">Home</a>
+
                 <a href="products.html">SHOP THE COLLECTION</a>
+
                 <a href="feeling.html">THE FEELING</a>
+
                 <a href="about.html">ABOUT</a>
+
                 <a href="contact.html">CONTACT</a>
+
             </nav>
+
             <a href="cart.html" class="cart-icon">
+
                 🛒 <span class="cart-count" id="cart-count">0</span>
+
             </a>
+
             <div class="hamburger" onclick="toggleMenu()">
+
                 <span></span>
+
                 <span></span>
+
                 <span></span>
+
             </div>
+
         </div>
+
     </header>
 
     <!-- CONFIRMATION -->
+
     <section class="confirmation-section">
+
         <div class="confirmation-container">
+
             <div class="confirmation-icon">✓</div>
-            <h1>Thank You for Your Order!</h1>
-            <p>Your order has been received and we're preparing it for delivery.</p>
+
+            <h1>Order Confirmed!</h1>
+
+            <p class="confirmation-subtitle">Thank you for your order. We're preparing it for delivery.</p>
+
+            <!-- ORDER NUMBER -->
+
+            <div class="order-number-box">
+
+                <p style="font-size: 12px; color: #999; margin: 0 0 5px 0;">Order Number</p>
+
+                <h2 id="order-number" style="font-size: 28px; font-weight: 900; margin: 0; color: #000;"></h2>
+
+            </div>
+
+            <!-- ORDER DETAILS -->
 
             <div class="confirmation-details" id="confirmation-details">
+
                 <!-- Details populated by JavaScript -->
+
             </div>
+
+            <!-- WHAT'S NEXT -->
 
             <div class="confirmation-next-steps">
-                <h3>What's Next?</h3>
+
+                <h3>What Happens Next?</h3>
+
                 <ul>
-                    <li>You'll receive a confirmation email shortly</li>
-                    <li>We'll send you a WhatsApp update with delivery details</li>
-                    <li>Delivery within 2-3 business days in Nairobi</li>
+
+                    <li>Confirmation email sent to your inbox</li>
+
+                    <li>We'll prepare your order for shipment</li>
+
+                    <li>Delivery within 1-2 days in Nairobi</li>
+
                 </ul>
+
             </div>
+
+            <!-- PAYMENT STATUS -->
+
+            <div class="payment-status" id="payment-status">
+
+                <!-- Payment info populated by JavaScript -->
+
+            </div>
+
+            <!-- CONTACT -->
 
             <div class="confirmation-contact">
-                <p>Questions? <a href="https://wa.me/254">Message us on WhatsApp</a> or <a href="mailto:m.karuoya@capwell.co.ke">email us</a></p>
+
+                <p>Questions or need help?</p>
+
+                <div class="contact-buttons">
+
+                    <a href="https://wa.me/254114445264" class="btn btn-outline" target="_blank">WhatsApp Us</a>
+
+                    <a href="mailto:karuoyamercy@gmail.com" class="btn btn-outline">Email Us</a>
+
+                </div>
+
             </div>
 
-            <a href="index.html" class="btn btn-primary">Back to Home</a>
+            <!-- CTA -->
+
+            <a href="index.html" class="btn btn-primary btn-full" style="margin-top: 2rem;">Back to Home</a>
+
         </div>
+
     </section>
 
     <!-- FOOTER -->
+
     <footer>
+
         <div class="footer-content">
+
             <div class="footer-links">
+
                 <a href="https://instagram.com" target="_blank">Instagram</a>
-                <a href="https://wa.me/254" target="_blank">WhatsApp</a>
+
+                <a href="https://wa.me/254114445264" target="_blank">WhatsApp</a>
+
                 <a href="https://tiktok.com" target="_blank">TikTok</a>
+
                 <a href="contact.html">Contact</a>
+
             </div>
+
             <p>&copy; 2026 Phoria. Breathe in the Moment.</p>
+
         </div>
+
     </footer>
 
-    <!-- LOAD EMAILJS FIRST -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
-    
-    <!-- THEN LOAD SCRIPT.JS -->
+    <!-- LOAD SCRIPT.JS -->
+
     <script src="script.js"></script>
+
 </body>
+
 </html>
