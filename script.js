@@ -412,10 +412,6 @@ async function handleCheckout(event) {
     
     console.log('📋 Form data:', { firstName, lastName, email, phone, address, city });
     
-    // DEBUG: Check all radio buttons
-    const allRadios = document.querySelectorAll('input[type="radio"]');
-    console.log('📻 Total radio buttons on page:', allRadios.length);
-    
     // DEBUG: Check payment radios specifically
     const paymentRadios = document.querySelectorAll('input[name="payment"]');
     console.log('💳 Payment radios found:', paymentRadios.length);
@@ -432,7 +428,6 @@ async function handleCheckout(event) {
         console.log('✅ Payment method selected:', paymentMethod);
     } else {
         console.warn('⚠️ No payment method checked, using default: mpesa');
-        // Try to auto-select first radio
         const firstRadio = document.querySelector('input[name="payment"]');
         if (firstRadio) {
             firstRadio.checked = true;
@@ -746,6 +741,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Display checkout items if on checkout page
     if (window.location.pathname.includes('checkout.html')) {
         displayCheckoutItems();
+        
+        // Attach checkout form listener
+        const checkoutForm = document.getElementById('checkoutForm');
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', handleCheckout);
+            console.log('✅ Checkout form listener attached');
+        }
     }
     
     // Display confirmation if on confirmation page
